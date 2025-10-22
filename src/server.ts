@@ -47,7 +47,7 @@ server.use(express.urlencoded({ extended: true }));
 /**
  * Set the public folder
  */
-server.use(express.static(`{__dirname}/public`));
+server.use(express.static(`${__dirname}/public`));
 
 /**
  * Cookie parser
