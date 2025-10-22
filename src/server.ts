@@ -18,6 +18,12 @@ import config from '@/config';
 import { logger, logtail } from '@/lib/winston';
 import { connectDB, disconnectDB } from './lib/mongoose';
 
+
+/**
+ * Module alias registration (must be first)
+ */
+import 'module-alias/register';
+
 /**
  * Routes
  */

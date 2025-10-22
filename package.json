@@ -1,12 +1,13 @@
 {
   "name": "modern-portfolio-api",
   "version": "1.0.0",
-  "description": "api for portfolio",
-  "main": "dist/server.js",
+  "_moduleAliases": {
+    "@": "dist"
+  },
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node -r module-alias/register dist/server.js",
     "prod": "npm run build && npm run start"
   },
   "author": "omarcode",
@@ -25,6 +26,7 @@
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "mongoose": "^8.18.2",
     "winston": "^3.18.3"
   },
