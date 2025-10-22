@@ -15,15 +15,17 @@ const transportation: transport[] = [];
 
 // Throw error when source token or ingesting host is missing
 if (!config.LOGTAIL_SOURCE_TOKEN || !config.LOGTAIL_INGESTING_HOST) {
-    throw new Error ('Logtail source token or ingesting host is missing.');
+    throw new Error('Logtail source token or ingesting host is missing.');
 }
 
 // Create a Logtail instance for sending structured logs to remote logging service
-const logtail = new Logtail (config.LOGTAIL_SOURCE_TOKEN, {
-    endpoint: config.LOGTAIL_INGESTING_HOST
+const logtail = new Logtail(config.LOGTAIL_SOURCE_TOKEN, {
+    endpoint: config.LOGTAIL_INGESTING_HOST.startsWith('http') 
+        ? config.LOGTAIL_INGESTING_HOST 
+        : `https://${config.LOGTAIL_INGESTING_HOST}`
 });
 
-// In production enviroment, push LogtailTransport to winston transport
+// In production environment, push LogtailTransport to winston transport
 if (config.NODE_ENV === 'production') {
     transportation.push(new LogtailTransport(logtail));
 }
@@ -31,16 +33,16 @@ if (config.NODE_ENV === 'production') {
 // Destructure logging format utilities from winston
 const { colorize, combine, timestamp, label, printf } = format;
 
-// In development enviroment, use console logging for real-time feedback
-if(config.NODE_ENV === 'development') {
+// In development environment, use console logging for real-time feedback
+if (config.NODE_ENV === 'development') {
     transportation.push(
         new transports.Console({
             format: combine(
-                colorize({all: true}),
+                colorize({ all: true }),
                 label(),
-                timestamp({format: 'DD MMMM hh:mm:ss A'}),
-                printf(({ level, message, timestamp })=> {
-                        return `${timestamp} [${level}]: ${message}`;
+                timestamp({ format: 'DD MMMM hh:mm:ss A' }),
+                printf(({ level, message, timestamp }) => {
+                    return `${timestamp} [${level}]: ${message}`;
                 }),
             )
         }),
