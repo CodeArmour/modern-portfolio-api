@@ -51,7 +51,7 @@ const server = express();
 
 const allowedOrigins = [
   'http://localhost:3000',                 // for local Next.js dev
-  'https://your-vercel-domain.vercel.app', // replace with your deployed frontend
+  'https://modern-portfolio-red-alpha.vercel.app', // replace with your deployed frontend
 ];
 
 server.use(
