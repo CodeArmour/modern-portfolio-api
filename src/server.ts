@@ -7,6 +7,7 @@
  * Module alias registration (must be first)
  */
 import 'module-alias/register';
+import cors from 'cors';
 
 // Debug: Check all environment variables
 console.log('=== ENVIRONMENT VARIABLES CHECK ===');
@@ -47,6 +48,19 @@ console.log('PORT:', config.PORT);
  * Initial express
  */
 const server = express();
+
+const allowedOrigins = [
+  'http://localhost:3000',                 // for local Next.js dev
+  'https://your-vercel-domain.vercel.app', // replace with your deployed frontend
+];
+
+server.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  })
+);
 
 /**
  * Secure headers
