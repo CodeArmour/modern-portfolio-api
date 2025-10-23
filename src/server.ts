@@ -8,6 +8,17 @@
  */
 import 'module-alias/register';
 
+// Debug: Check all environment variables
+console.log('=== ENVIRONMENT VARIABLES CHECK ===');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT);
+console.log('MONGO_CONNECTION_URI exists:', !!process.env.MONGO_CONNECTION_URI);
+console.log('LOGTAIL_SOURCE_TOKEN exists:', !!process.env.LOGTAIL_SOURCE_TOKEN);
+console.log('CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
+console.log('JWT_ACCESS_SECRET exists:', !!process.env.JWT_ACCESS_SECRET);
+console.log('Total env vars:', Object.keys(process.env).length);
+console.log('===================================');
+
 /**
  * Node modules
  */
