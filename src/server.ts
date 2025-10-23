@@ -95,7 +95,7 @@ const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
         logger.info('Server shutdown', signal);
 
         // Flush any remaining logs to Logtail before exiting
-        logtail.flush();
+        logtail?.flush();
 
         // Exit the process cleanly
         process.exit(0);
